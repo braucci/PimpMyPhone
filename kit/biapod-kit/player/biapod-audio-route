@@ -1,0 +1,65 @@
+#!/bin/sh
+# Restore the PinePhone hardware output after PulseAudio starts.
+set -u
+
+card=
+attempt=0
+while [ "$attempt" -lt 15 ]; do
+    card=$(LC_ALL=C pactl list cards 2>/dev/null | awk '
+        /^Card #/ { name = "" }
+        /^[[:space:]]*Name: / { name = $2 }
+        /HiFi \(Mic, Speaker\)/ && name != "" { print name; exit }
+    ')
+    [ -n "$card" ] && break
+    attempt=$((attempt + 1))
+    sleep 1
+done
+
+if [ -z "$card" ]; then
+    echo 'PinePhone audio card unavailable' >&2
+    exit 1
+fi
+
+alsa_card=$(LC_ALL=C pactl list cards | awk -v selected="$card" '
+    /^Card #/ { found = 0 }
+    /^[[:space:]]*Name: / { found = ($2 == selected) }
+    found && /alsa.card = / { gsub(/"/, "", $3); print $3; exit }
+')
+
+profile='HiFi (Mic, Speaker)'
+if [ -n "$alsa_card" ] && amixer -c "$alsa_card" cget numid=2 2>/dev/null | grep -Eqi ': values=(on|1)'; then
+    profile='HiFi (Headphones, Mic)'
+fi
+
+active_profile=$(LC_ALL=C pactl list cards | awk -v selected="$card" '
+    /^Card #/ { found = 0 }
+    /^[[:space:]]*Name: / { found = ($2 == selected) }
+    found && /Active Profile: / { sub(/^[[:space:]]*Active Profile: /, ""); print; exit }
+')
+if [ "$active_profile" != "$profile" ]; then
+    pactl set-card-profile "$card" "$profile" || exit 1
+fi
+
+sink_prefix="alsa_output.${card#alsa_card.}."
+attempt=0
+sink=
+while [ "$attempt" -lt 10 ]; do
+    sink=$(pactl list short sinks | awk -v prefix="$sink_prefix" 'index($2, prefix) == 1 { print $2; exit }')
+    [ -n "$sink" ] && break
+    attempt=$((attempt + 1))
+    sleep 1
+done
+if [ -z "$sink" ]; then
+    echo 'PinePhone hardware sink unavailable' >&2
+    exit 1
+fi
+
+default_sink=$(pactl info | sed -n 's/^Default Sink: //p')
+if [ "$default_sink" != "$sink" ]; then
+    pactl set-default-sink "$sink" || exit 1
+fi
+sink_index=$(pactl list short sinks | awk -v target="$sink" '$2 == target { print $1; exit }')
+pactl list short sink-inputs | awk -v target="$sink_index" '$2 != target { print $1 }' | while IFS= read -r input; do
+    [ -n "$input" ] && pactl move-sink-input "$input" "$sink" || true
+done
+printf 'profile=%s sink=%s\n' "$profile" "$sink"

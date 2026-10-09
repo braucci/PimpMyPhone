@@ -1,0 +1,20 @@
+#!/bin/sh
+set -eu
+[ "$(uname -r)" = 6.17.5 ] || { echo 'Kernel diverso dalla base di riferimento'; exit 71; }
+export XDG_CURRENT_DESKTOP=sway GDK_BACKEND=wayland GDK_SCALE=1 GDK_DPI_SCALE=1
+mkdir -p "$HOME/.local/state"
+exec >> "$HOME/.local/state/biapod-session.log" 2>&1
+printf 'boot_id='; cat /proc/sys/kernel/random/boot_id
+pulseaudio --kill || true
+attempt=0
+while pulseaudio --check && [ "$attempt" -lt 20 ]; do
+  sleep 0.2
+  attempt=$((attempt + 1))
+done
+pulseaudio --start --log-target=syslog
+"$HOME/pinepod/biapod-audio-route"
+pactl set-sink-mute @DEFAULT_SINK@ 0
+pactl set-sink-volume @DEFAULT_SINK@ 50%
+systemctl --user start biapod-mpd.service
+/usr/bin/python3 "$HOME/pinepod/biapod-initialize.py" &
+exec sway -c "$HOME/pinepod/biapod-sway.conf"

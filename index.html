@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="PimpMyPhone: la guida pratica per trasformare un PinePhone originale in BiaPod, un lettore musicale offline. Materiali, installazione, musica, controlli e recupero.">
+  <meta name="theme-color" content="#164b47">
+  <title>PimpMyPhone — Da PinePhone a BiaPod</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+<a href="#guida" class="skip">Salta alla guida</a>
+<noscript><div class="noscript">Puoi leggere tutta la guida e scaricare i file. Per salvare le tappe completate e usare la ricerca serve JavaScript.</div></noscript>
+<div class="wrap" id="inizio">
+  <header class="site-header">
+    <a class="brand" href="#inizio" aria-label="PimpMyPhone, inizio"><span class="brand-mark" aria-hidden="true"></span>PimpMyPhone<span style="color:var(--orange)">.</span></a>
+    <nav class="top-links" aria-label="Navigazione principale"><a href="#progetto">Il progetto</a><a href="#guida">La guida</a><a href="#aiuto">Aiuto</a><a class="nav-download" href="#download">Scarica il kit ↗</a></nav>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Progetto 01 / PinePhone → lettore musicale</div>
+        <h1 id="hero-title">Un PinePhone.<br>Tutta la tua<br><em>musica.</em></h1>
+        <p class="hero-lead">Dai una nuova vita al tuo telefono con BiaPod. Copertine, ghiera touch e playlist, in un lettore che porta con sé tutta la tua raccolta.</p>
+        <div class="actions"><a href="#guida" class="button primary">Costruisci il tuo BiaPod <span aria-hidden="true">↗</span></a><a href="#progetto" class="button">Come funziona ↓</a></div>
+        <p class="hero-note">Guida in italiano · 10 tappe · si consulta anche offline<br>Edizione laboratorio 0.1 — 8 ottobre 2026</p>
+      </div>
+      <div class="hero-visual" aria-label="Illustrazione di BiaPod su un PinePhone">
+        <div class="orbit" aria-hidden="true"></div><span class="visual-tag">NUOVA VITA.<br>STESSO TELEFONO.</span>
+        <div class="phone"><div class="speaker"></div><div class="phone-screen">
+          <img src="assets/biapod-logo.svg" alt="BiaPod" class="phone-logo" width="95" height="29">
+          <div class="demo-cover" aria-label="Copertina illustrata originale: Onde"><b>ONDE</b><span>SUONI IN MOVIMENTO / VOL. 01</span></div>
+          <div class="song">Un posto per la musica<small>La tua raccolta, sempre con te</small></div>
+          <div class="demo-progress"></div><div class="demo-time"><span>1:24</span><span>4:06</span></div>
+          <div class="demo-wheel"><span class="plus">+</span><span class="prev">◀◀</span><button class="demo-play" aria-label="Avvia la demo visiva" aria-pressed="false">▶</button><span class="next">▶▶</span><span class="minus">−</span></div>
+          <div class="demo-tabs"><span>Ora</span><span>Album</span><span>Cover Flow</span><span>Playlist</span></div>
+        </div></div>
+        <p class="visual-foot" data-demo-status>Anteprima illustrata · nessun audio</p>
+      </div>
+    </section>
+    <div class="quick-spec" aria-label="Configurazione di riferimento">
+      <div><small>IL TELEFONO</small><strong>PinePhone originale · A64</strong></div><div><small>IL SISTEMA DI RIFERIMENTO</small><strong>postmarketOS v25.12</strong></div><div><small>LA TUA RACCOLTA</small><strong>Locale, sulla microSD</strong></div><div><small>LA FILOSOFIA</small><strong>Accendi. Scegli. Ascolta.</strong></div>
+    </div>
+    <section class="intro" id="progetto" aria-labelledby="project-title">
+      <div><p class="eyebrow">Un piccolo progetto, un oggetto nuovo</p><h2 id="project-title">Un lettore dedicato.<br>Fatto da te.</h2></div>
+      <div><p>BiaPod è un’interfaccia musicale scritta in Python con GTK e Cairo. MPD si occupa della riproduzione; Sway mostra il lettore a schermo intero. Puoi cercare un artista, sfogliare gli album, usare la ghiera e creare playlist.</p><p>Il percorso comincia su una microSD di prova. Dopo il collaudo puoi installare il sistema nella memoria interna e usare una scheda separata per gli album.</p>
+        <div class="path-map" aria-label="Percorso: computer, scheda di prova, configurazione finale"><div class="node"><b>01 / Computer</b>Prepari i file</div><span class="arrow" aria-hidden="true">→</span><div class="node"><b>02 / microSD</b>Provi BiaPod</div><span class="arrow" aria-hidden="true">→</span><div class="node"><b>03 / eMMC + SD</b>Sistema + musica</div></div>
+      </div>
+    </section>
+    <div class="guide-shell" id="guida">
+      <aside class="sidebar" aria-label="Indice delle tappe">
+        <p class="eyebrow">Il tuo percorso</p><div class="progress-summary"><span>Tappe completate</span><strong data-progress-text>0 / 10</strong></div><div class="progress-track"><span data-progress-bar></span></div>
+        <nav class="step-nav">
+          <a href="#kit" class="active" aria-current="step"><b>01</b>Prepara il necessario</a><a href="#sistema"><b>02</b>Scegli il sistema</a><a href="#scheda"><b>03</b>Prepara la microSD</a><a href="#primo-avvio"><b>04</b>Primo avvio e accesso</a><a href="#download"><b>05</b>Installa BiaPod</a><a href="#prima-musica"><b>06</b>Il primo ascolto</a><a href="#sessione"><b>07</b>Avvio diretto e switch</a><a href="#memoria"><b>08</b>Passa alla eMMC</a><a href="#libreria"><b>09</b>Collega la raccolta</a><a href="#collaudo"><b>10</b>Collauda il tuo lettore</a>
+        </nav>
+        <div class="sidebar-bottom"><a href="#aiuto">Qualcosa non funziona? ↗</a><a href="#fonti">Fonti e versioni ↗</a><button class="print-button" data-print>Stampa / salva in PDF</button><button class="text-button" data-reset>Azzera i progressi</button><small class="muted">I progressi restano in questo browser. Nessun account.</small></div>
+      </aside>
+      <div class="guide-content">
+        <div class="guide-heading"><h2>Dal kit al primo play.</h2><span class="pill">GUIDA PASSO PASSO</span></div>
+        <div class="mobile-toc"><label for="mobile-step" data-mobile-progress>0 di 10 tappe completate</label><select id="mobile-step" aria-label="Vai a una tappa"><option value="kit">01 · Prepara il necessario</option><option value="sistema">02 · Scegli il sistema</option><option value="scheda">03 · Prepara la microSD</option><option value="primo-avvio">04 · Primo avvio e accesso</option><option value="download">05 · Installa BiaPod</option><option value="prima-musica">06 · Il primo ascolto</option><option value="sessione">07 · Avvio diretto e switch</option><option value="memoria">08 · Passa alla eMMC</option><option value="libreria">09 · Collega la raccolta</option><option value="collaudo">10 · Collauda il lettore</option></select></div>
+
+        <section class="step" id="kit" aria-labelledby="kit-title">
+          <div class="step-top"><span class="step-number">01</span><div><p class="eyebrow">Prima di cominciare / sul tavolo</p><h2 id="kit-title">Prepara il necessario.</h2></div></div>
+          <p>Questa edizione riguarda il <strong>PinePhone originale con processore Allwinner A64</strong>. La prova del progetto è stata fatta sul modello da 3 GB di RAM e 32 GB di eMMC. Il modello da 2 GB richiede un collaudo separato.</p>
+          <div class="kit-grid"><div class="kit-item"><span class="kit-icon" aria-hidden="true">01</span><b>PinePhone + batteria</b><span>Batteria in buone condizioni e telefono carico prima della preparazione.</span></div><div class="kit-item"><span class="kit-icon" aria-hidden="true">02</span><b>Computer + cavo dati</b><span>Mac o Linux per i comandi della guida; un cavo USB-C che trasferisca dati.</span></div><div class="kit-item"><span class="kit-icon" aria-hidden="true">03</span><b>microSD di prova + lettore</b><span>Almeno 8 GB cancellabili. Per sistema e molti album, usa una scheda più capiente.</span></div><div class="kit-item"><span class="kit-icon" aria-hidden="true">04</span><b>La tua musica</b><span>Due album per iniziare. Una microSD dati da 128 GB è comoda per la raccolta finale.</span></div></div>
+          <div class="notice amber"><b>Controlla il modello prima di scaricare.</b>PinePhone Pro e telefoni Android richiedono immagini, driver e procedure diverse. Questo kit non va installato su quei dispositivi.</div>
+          <h3>Salva ciò che vuoi conservare</h3><p>Copia sul computer i file della scheda di prova: la scrittura del sistema la cancellerà. La memoria interna del telefono viene toccata solo nella tappa 08, dopo un backup completo. Tieni gli originali della musica su un secondo supporto.</p>
+          <p class="source-note">Hardware: <a href="https://pine64.org/pinephone/">scheda ufficiale PinePhone</a>. Accesso a batteria e schede: <a href="https://files.pine64.org/doc/PinePhone/PinePhone_User_Manual.pdf">manuale PINE64</a>.</p>
+          <label class="complete"><input type="checkbox" data-step-check="kit">Ho verificato il modello e salvato i dati della scheda di prova.</label>
+        </section>
+
+        <section class="step" id="sistema" aria-labelledby="system-title">
+          <div class="step-top"><span class="step-number">02</span><div><p class="eyebrow">Sul computer / download</p><h2 id="system-title">Parti dalla stessa base.</h2></div></div>
+          <p>Il riferimento di questa guida è <strong>postmarketOS v25.12, Sxmo/Sway 1.18.0, kernel 6.17.5</strong>, build del 3 agosto 2026. postmarketOS oggi si chiama Nura: negli archivi puoi incontrare entrambi i nomi.</p>
+          <div class="notice"><b>Una base precisa per confrontare i risultati.</b>Il nostro test con cinque album è rimasto utilizzabile; la precedente base con kernel 6.18.3 aveva blocchi ricorrenti. Non abbiamo ancora dimostrato la causa né la stabilità a lungo termine della nuova configurazione con l’intera raccolta. Il kit controlla il kernel di riferimento.</div>
+          <div class="file-card"><span class="file-symbol" aria-hidden="true">IMG.XZ</span><div><b>Immagine ufficiale · PinePhone · Sxmo</b><small>Build 20260803-0755 · circa 401 MiB compressi</small></div><a class="button" href="https://images.nura.eco/bpo/v25.12/pine64-pinephone/sxmo-de-sway/20260803-0755/20260803-0755-postmarketOS-v25.12-sxmo-de-sway-1.18.0-pine64-pinephone.img.xz">Scarica ↗</a></div>
+          <h3>Verifica il file scaricato</h3><p>Apri il terminale del computer nella cartella dove hai salvato l’immagine. Il risultato deve iniziare con l’hash riportato sotto, per intero.</p>
+          <div data-tab-group><div class="tabs" role="tablist" aria-label="Computer per verifica immagine"><button class="tab" id="hash-mac-tab" role="tab" aria-selected="true" aria-controls="hash-mac">macOS</button><button class="tab" id="hash-linux-tab" role="tab" aria-selected="false" aria-controls="hash-linux" tabindex="-1">Linux</button></div>
+            <div role="tabpanel" id="hash-mac" aria-labelledby="hash-mac-tab"><div class="command"><div class="command-header">MAC · NELLA CARTELLA DEL DOWNLOAD<button class="copy" data-copy="cmd-hash-mac">Copia</button></div><pre><code id="cmd-hash-mac">shasum -a 256 20260803-0755-postmarketOS-v25.12-sxmo-de-sway-1.18.0-pine64-pinephone.img.xz</code></pre></div></div>
+            <div role="tabpanel" id="hash-linux" aria-labelledby="hash-linux-tab" hidden><div class="command"><div class="command-header">LINUX · NELLA CARTELLA DEL DOWNLOAD<button class="copy" data-copy="cmd-hash-linux">Copia</button></div><pre><code id="cmd-hash-linux">sha256sum 20260803-0755-postmarketOS-v25.12-sxmo-de-sway-1.18.0-pine64-pinephone.img.xz</code></pre></div></div>
+          </div>
+          <div class="command"><div class="command-header">SHA-256 ATTESO · ARCHIVIO IMG.XZ</div><pre><code>e82b065f342207b9bc3753137b6c6a936f21f1c1d30bc1365de882d6f29afc67</code></pre></div>
+          <p class="source-note">Download dal <a href="https://images.nura.eco/bpo/v25.12/pine64-pinephone/sxmo-de-sway/20260803-0755/">server ufficiale delle immagini</a>; hash confrontato con l’archivio usato nel progetto. Il collegamento al file è stato verificato l’8 ottobre 2026. La versione corrente della distribuzione può essere diversa: <a href="https://nura.eco/install/">pagina ufficiale di installazione Nura</a>.</p>
+          <label class="complete"><input type="checkbox" data-step-check="sistema">Ho scaricato l’immagine corretta e confrontato tutti i caratteri dell’hash.</label>
+        </section>
+
+        <section class="step" id="scheda" aria-labelledby="sd-title">
+          <div class="step-top"><span class="step-number">03</span><div><p class="eyebrow">Sul computer / scheda di prova</p><h2 id="sd-title">Prepara la microSD.</h2></div></div>
+          <p>Per la prima prova puoi usare <a href="https://etcher.balena.io/">balenaEtcher</a>. Si occupa di scrivere l’immagine e rileggerla per la verifica.</p>
+          <ol class="step-list"><li>Inserisci la microSD cancellabile nel lettore. Scollega gli altri dischi esterni che non servono.</li><li>In Etcher scegli <strong>Flash from file</strong> e apri l’immagine <code>.img.xz</code> della tappa 02.</li><li>In <strong>Select target</strong> confronta nome e capacità con la scheda inserita. La destinazione deve essere la scheda di prova.</li><li>Avvia <strong>Flash!</strong>, autorizza la scrittura sul computer e attendi anche la verifica finale.</li><li>Espelli la scheda. A PinePhone spento, rimuovi la batteria, inserisci la microSD, rimetti la batteria e chiudi il coperchio.</li><li>Accendi il telefono. Al primo avvio attendi il completamento della preparazione del sistema.</li></ol>
+          <div class="notice"><b>Cosa dovresti vedere</b>La sessione Sxmo con sfondo e orologio. BiaPod viene installato nelle tappe successive. Un cursore iniziale può essere normale; una schermata ferma per diversi minuti richiede un controllo della scrittura.</div>
+          <p>Se macOS propone di inizializzare una partizione Linux dopo la scrittura, scegli <strong>Ignora</strong>. Per aprirla e modificarla useremo il PinePhone.</p>
+          <p class="source-note">Il PinePhone originale può avviarsi dalla microSD prima della eMMC: <a href="https://pine64.org/documentation/PinePhone/Installation/Boot_priority/">ordine di avvio PINE64</a>.</p>
+          <label class="complete"><input type="checkbox" data-step-check="scheda">Etcher ha completato la verifica e Sxmo si avvia dalla scheda.</label>
+        </section>
+
+        <section class="step" id="primo-avvio" aria-labelledby="boot-title">
+          <div class="step-top"><span class="step-number">04</span><div><p class="eyebrow">Sul PinePhone, poi sul computer</p><h2 id="boot-title">Apri la manutenzione.</h2></div></div>
+          <p>L’immagine di riferimento usa l’account <code>user</code>. Per il primo accesso le immagini di prova pubblicano la password iniziale <code>147147</code>: cambiala sul telefono con <code>passwd</code> e usa da quel momento la tua.</p>
+          <ol class="step-list"><li>In Sxmo premi Power tre volte rapidamente per aprire un terminale. In alternativa apri il menu, scegli <strong>Apps</strong> o <strong>Binaries</strong>, poi <strong>foot</strong>.</li><li>Se manca la tastiera, prova una pressione di Volume −. Se vedi un simbolo rosso barrato e i tocchi non rispondono, una breve pressione di Power può sbloccare gli input.</li><li>Collega il PinePhone al computer con il cavo USB dati. Avvia l’accesso temporaneo dal terminale del telefono:</li></ol>
+          <div class="command"><div class="command-header">PINEPHONE · TERMINALE<button class="copy" data-copy="cmd-sshd">Copia</button></div><pre><code id="cmd-sshd">sudo systemctl start sshd</code></pre></div>
+          <p>Inserisci la password <strong>sul telefono</strong>. Il ritorno al simbolo <code>$</code> senza messaggi indica che il comando è terminato. Sul computer apri una sessione:</p>
+          <div class="command"><div class="command-header">MAC O LINUX · TERMINALE<button class="copy" data-copy="cmd-ssh">Copia</button></div><pre><code id="cmd-ssh">ssh user@172.16.42.1</code></pre></div>
+          <p>Al primo collegamento controlla che sia il telefono appena preparato e conferma la chiave del dispositivo. Se non viene creata la rete USB, consulta la <a href="https://wiki.nura.eco/wiki/USB_Internet">guida alla rete USB della distribuzione</a>. Non disattivare il controllo delle chiavi per nascondere un avviso.</p>
+          <h3>Internet serve per installare i pacchetti</h3><p>Per questa fase lascia lo switch 2 su ON e usa <strong>Sxmo → Networks</strong> per collegarti al Wi-Fi. In alternativa configura la condivisione Internet via USB. Il lettore, una volta preparato, riproduce i file locali anche senza rete.</p>
+          <div class="command"><div class="command-header">PINEPHONE · CONTROLLO DELLA BASE<button class="copy" data-copy="cmd-base">Copia</button></div><pre><code id="cmd-base">uname -r
+findmnt /
+cat /etc/os-release</code></pre></div>
+          <p>Il kernel atteso è <strong>6.17.5</strong>. Annota la sorgente di <code>/</code>: ti servirà per distinguere il sistema avviato dalla scheda da quello sulla memoria interna.</p>
+          <p class="source-note">Credenziali iniziali e accesso: <a href="https://nura.eco/install/">Nura, dopo l’installazione</a>. Menu e servizi: <a href="https://sxmo.org/docs/user/sxmo.7.html">manuale Sxmo</a>. I gesti possono cambiare con la versione.</p>
+          <label class="complete"><input type="checkbox" data-step-check="primo-avvio">Accedo al terminale, ho cambiato la password e verificato il kernel.</label>
+        </section>
+
+        <section class="step" id="download" aria-labelledby="download-title">
+          <div class="step-top"><span class="step-number">05</span><div><p class="eyebrow">Sul PinePhone / file del progetto</p><h2 id="download-title">Installa il lettore.</h2></div></div>
+          <p>Il kit contiene l’interfaccia BiaPod, il logo, i comandi della ghiera e i file per una sessione dedicata. I pacchetti Linux si scaricano dai repository configurati sull’immagine.</p>
+          <div class="file-card"><span class="file-symbol" aria-hidden="true">TAR.GZ</span><div><b>BiaPod · kit sorgente 0.1</b><small>Codice + configurazione + controllo preliminare + ripristino</small></div><a class="button green" href="downloads/biapod-kit-0.1.tar.gz" download>Scarica il kit ↓</a></div>
+          <div class="notice amber"><b>Stato del pacchetto</b>Il player proviene dal PinePhone del progetto. L’installatore riutilizzabile è nuovo: è stato controllato sul computer, ma va ancora provato dall’inizio su un’altra scheda. Usalo inizialmente sulla microSD di prova. Il kit non scrive immagini su eMMC.</div>
+          <ol class="step-list"><li>Sul computer scarica il kit, apri il terminale nella cartella del download e copialo al telefono:</li></ol>
+          <div class="command"><div class="command-header">MAC O LINUX · CARTELLA DEL DOWNLOAD<button class="copy" data-copy="cmd-send-kit">Copia</button></div><pre><code id="cmd-send-kit">scp -O biapod-kit-0.1.tar.gz user@172.16.42.1:~/</code></pre></div>
+          <p>Nel terminale del PinePhone (anche nella sessione SSH dal computer), installa le dipendenze. Leggi il riepilogo di APK: deve aggiungere i pacchetti alla base v25.12; se propone un cambio di distribuzione o kernel, interrompi e controlla i repository.</p>
+          <div class="command"><div class="command-header">PINEPHONE · PACCHETTI<button class="copy" data-copy="cmd-packages">Copia</button></div><pre><code id="cmd-packages">sudo apk add mpd py3-gobject3 py3-cairo gtk+3.0
+cd "$HOME"
+tar -xzf biapod-kit-0.1.tar.gz
+cd biapod-kit
+sha256sum -c SHA256SUMS
+python3 setup.py --check</code></pre></div>
+          <p>Quando il controllo risponde <code>BASE_COMPATIBILE</code>, prepara i file <strong>come utente normale</strong>:</p>
+          <div class="command"><div class="command-header">PINEPHONE · CONFIGURAZIONE UTENTE<button class="copy" data-copy="cmd-install">Copia</button></div><pre><code id="cmd-install">python3 setup.py --install</code></pre></div>
+          <p>Vengono creati <code>~/pinepod</code>, la configurazione MPD e una copia dei file utente sostituiti in <code>~/.local/state/pimpmyphone-backup</code>. La musica resta in <code>~/Music</code>. La sessione grafica verrà attivata alla tappa 07.</p>
+          <p class="source-note">Dipendenze: <a href="https://pkgs.alpinelinux.org/package/v3.23/community/aarch64/mpd">MPD</a>, <a href="https://pkgs.alpinelinux.org/package/v3.23/main/aarch64/py3-gobject3">PyGObject</a>. Il kit include il codice della configurazione audio con la relativa intestazione di licenza; non include Linux, musica o copertine commerciali.</p>
+          <label class="complete"><input type="checkbox" data-step-check="download">Gli hash sono corretti e la configurazione utente è stata creata.</label>
+        </section>
+
+        <section class="step" id="prima-musica" aria-labelledby="music-first-title">
+          <div class="step-top"><span class="step-number">06</span><div><p class="eyebrow">Due album bastano / prima prova</p><h2 id="music-first-title">Dai un ordine alla musica.</h2></div></div>
+          <p>Per la prova iniziale copia due album nella cartella Music del sistema. Con il sistema ancora sulla microSD di prova, la scheda musicale finale non è inserita nel telefono.</p>
+          <div class="command"><div class="command-header">STRUTTURA CONSIGLIATA · ESEMPIO</div><pre><code>Music/
+└── Nome artista/
+    └── Titolo album/
+        ├── cover.jpg
+        ├── 01 - Primo brano.mp3
+        └── 02 - Secondo brano.mp3</code></pre></div>
+          <p>Sul computer entra nella cartella che contiene gli artisti. Sostituisci <code>Nome artista</code> con una cartella reale, mantenendo le virgolette per gli spazi:</p>
+          <div class="command"><div class="command-header">MAC O LINUX · COMANDO DA ADATTARE<button class="copy" data-copy="cmd-send-music">Copia</button></div><pre><code id="cmd-send-music">scp -Or "Nome artista" user@172.16.42.1:~/Music/</code></pre></div>
+          <h3>Copertine e metadati</h3><p>Metti una <code>cover.jpg</code> nella cartella dell’album; sono riconosciuti anche i nomi <code>folder</code>, <code>front</code> e <code>album</code>, nei formati JPG, PNG o WebP. Una copertina intorno a 600 × 600 pixel è sufficiente come preparazione pratica.</p><p>Completa i tag titolo, artista, album e numero di traccia: BiaPod ricava la griglia dalle cartelle e legge i titoli dei brani attraverso MPD. Numerare i file aiuta quando i tag non sono presenti.</p>
+          <div class="notice"><b>MP3 è una scelta semplice, non un obbligo.</b>Il catalogo riconosce anche FLAC, M4A, AAC, Ogg, Opus e WAV; la decodifica dipende dal supporto di MPD nella distribuzione. Non ricodificare gli MP3 già pronti. Per ogni conversione conserva gli originali.</div>
+          <label class="complete"><input type="checkbox" data-step-check="prima-musica">Ho copiato due album, con cartelle ordinate e copertine.</label>
+        </section>
+
+        <section class="step" id="sessione" aria-labelledby="session-title">
+          <div class="step-top"><span class="step-number">07</span><div><p class="eyebrow">Sul PinePhone / avvio dedicato</p><h2 id="session-title">Accendi direttamente BiaPod.</h2></div></div>
+          <p>La sessione dedicata avvia PulseAudio e MPD, poi mostra BiaPod in Sway a 720 × 1440. I servizi telefonici e i servizi audio alternativi vengono disattivati per questo uso musicale.</p>
+          <div class="command"><div class="command-header">PINEPHONE · DALLA CARTELLA BIAPOD-KIT<button class="copy" data-copy="cmd-activate">Copia</button></div><pre><code id="cmd-activate">sudo python3 system_setup.py activate "$USER"
+sudo reboot</code></pre></div>
+          <p>L’attivazione salva la sessione precedente e lo stato dei servizi. SSH non viene abilitato all’avvio. Il terminale manuale di BiaPod si richiama con tre pressioni rapide di Power; questa scorciatoia del nuovo kit richiede una prova sul dispositivo.</p>
+          <h3>Imposta gli switch per un lettore offline</h3><p>Dopo avere installato i pacchetti, spegni il PinePhone e scollega il cavo prima di aprire il coperchio. Lo switch <strong>6 deve restare su ON</strong> per usare le cuffie. Gli altri possono essere spenti se non ti servono.</p>
+          <div class="switches" aria-label="Configurazione lettore: switch 1, 2, 3, 4 e 5 spenti; 6 acceso"><div>1<i></i><small>OFF</small></div><div>2<i></i><small>OFF</small></div><div>3<i></i><small>OFF</small></div><div>4<i></i><small>OFF</small></div><div>5<i></i><small>OFF</small></div><div class="on">6<i></i><small>ON</small></div></div>
+          <div class="table-wrap"><table><thead><tr><th>Switch</th><th>Funzione</th><th>Per BiaPod</th></tr></thead><tbody><tr><td>1</td><td>Modem e GNSS</td><td>OFF</td></tr><tr><td>2</td><td>Wi-Fi e Bluetooth, insieme</td><td>OFF, dopo i download</td></tr><tr><td>3</td><td>Microfoni integrati</td><td>OFF</td></tr><tr><td>4–5</td><td>Fotocamere</td><td>OFF</td></tr><tr><td>6</td><td>Jack audio / UART</td><td>ON = audio cuffie</td></tr></tbody></table></div>
+          <p class="source-note">Il lato ON è verso la scritta ON e la parte alta del telefono. Cambiare gli switch mentre è acceso può danneggiare il firmware del modem: segui le <a href="https://pine64.org/documentation/PinePhone/Privacy_switches/">istruzioni PINE64 per gli interruttori</a>. La tabella riguarda la configurazione offline; il kit non prepara Bluetooth audio.</p>
+          <h3>Ora premi play</h3><p>Apri <strong>Album → Aggiorna</strong>, attendi l’indicizzazione, scegli un album e una traccia. Parti con il volume MPD intorno al 10%. Il kit inizializza la riproduzione a volume basso e in pausa.</p>
+          <div class="notice"><b>Lo schermo rimane acceso in questa edizione.</b>Lo spegnimento automatico dopo 30 secondi e la sospensione sono esclusi dalla base di confronto. Il pulsante Blocca impedisce i tocchi accidentali; tieni premuto il comando di sblocco per circa due secondi.</div>
+          <label class="complete"><input type="checkbox" data-step-check="sessione">BiaPod parte dopo il riavvio e i due album si sentono.</label>
+        </section>
+
+        <section class="step" id="memoria" aria-labelledby="emmc-title">
+          <div class="step-top"><span class="step-number">08</span><div><p class="eyebrow">Opzionale / dopo il collaudo sulla scheda</p><h2 id="emmc-title">Sistema dentro. Musica fuori.</h2></div></div>
+          <p>Per l’assetto finale installa Linux e BiaPod nella <strong>eMMC</strong>, la memoria interna. La microSD più capiente conterrà soltanto la musica. La procedura pubblica qui proposta è una nuova installazione della stessa base; i nostri script di clonazione del singolo prototipo non sono inclusi.</p>
+          <div class="notice amber"><b>Questo passaggio cancella il sistema interno.</b>Prima salva un’immagine completa della eMMC, i file personali e le playlist. Conserva la scheda di prova funzionante. Un backup dei soli album non salva il vecchio sistema.</div>
+          <ol class="step-list"><li>Per prima cosa salva le playlist da <code>~/.local/share/mpd/playlists</code> sul computer, usando una sessione SSH temporanea. Conserva anche il kit e l’immagine verificata della tappa 02.</li><li>Scarica <a href="https://github.com/dreemurrs-embedded/Jumpdrive/releases">JumpDrive per PinePhone originale</a>. Scrivilo con Etcher su <strong>un’altra microSD cancellabile</strong>, per conservare la scheda BiaPod di recupero.</li><li>Spegni il PinePhone, inserisci la scheda JumpDrive e avvia. Collega il cavo dati: JumpDrive espone la memoria interna come disco sul computer.</li><li>Identifica la eMMC dalla capacità e dal dispositivo. Non usare il numero di disco di un’altra guida: cambia a ogni collegamento. Salvala per intero come immagine e verifica la lettura prima di scrivere.</li><li>Espelli le partizioni esposte e scrivi con Etcher <strong>la stessa immagine Linux della tappa 02</strong> sulla eMMC verificata. Attendi anche la convalida.</li><li>Spegni, rimuovi JumpDrive e avvia senza microSD. Ripeti le tappe 04, 05 e 07 sulla memoria interna: stessi pacchetti, stesso kit, stessa sessione.</li><li>Verifica con <code>findmnt /</code> che la radice sia sulla eMMC. Poi passa alla scheda dati nella tappa 09.</li></ol>
+          <details class="faq"><summary>Come salvare la eMMC dal computer?</summary><p>Su Linux puoi usare GNOME Disks: seleziona la eMMC esposta da JumpDrive, smonta le partizioni, scegli <strong>Crea immagine disco</strong> e salva su un altro disco con spazio sufficiente. Su macOS identifica il disco con <code>diskutil list</code>; l’esempio seguente è da adattare e legge il disco intero. <code>diskN</code> è un segnaposto: non incollarlo alla cieca.</p><div class="command"><div class="command-header">MAC · ESEMPIO DA ADATTARE DOPO L’IDENTIFICAZIONE</div><pre><code>diskutil unmountDisk /dev/diskN
+sudo dd if=/dev/rdiskN of="$HOME/Desktop/pinephone-emmc-backup.img" bs=4m
+shasum -a 256 "$HOME/Desktop/pinephone-emmc-backup.img"
+sudo dd if=/dev/rdiskN bs=4m | shasum -a 256</code></pre></div><p>Controlla che il file abbia la stessa dimensione in byte dell’intero disco sorgente. L’ultimo comando legge di nuovo l’intera eMMC: attendi che termini senza errori di lettura e confronta i due valori SHA-256, che devono essere identici. Se differiscono, non procedere alla scrittura. Tieni il backup sul computer o su un disco diverso dalla destinazione.</p></details>
+          <p class="source-note">Procedura e limiti di JumpDrive: <a href="https://pine64.org/documentation/PinePhone/Installation/Installation_to_the_eMMC/">installazione eMMC PINE64</a> e <a href="https://github.com/dreemurrs-embedded/Jumpdrive">repository JumpDrive</a>. Con Tow-Boot già installato il percorso può cambiare: consulta le istruzioni ufficiali del bootloader prima di procedere.</p>
+          <label class="complete"><input type="checkbox" data-step-check="memoria">Ho un backup verificato e BiaPod si avvia dalla eMMC, oppure ho scelto di restare sulla scheda di prova.</label>
+        </section>
+
+        <section class="step" id="libreria" aria-labelledby="library-title">
+          <div class="step-top"><span class="step-number">09</span><div><p class="eyebrow">Dopo l’avvio da eMMC / scheda dati</p><h2 id="library-title">Collega tutta la raccolta.</h2></div></div>
+          <p>Prepara sul computer una microSD dati exFAT con una cartella <code>Music</code> alla radice, ordinata come nella tappa 06. La formattazione va fatta soltanto dopo avere salvato i file presenti. Una scheda che conteneva un sistema può conservare un bootloader: consulta <a href="https://pine64.org/documentation/PinePhone/Installation/Reuse_microSD_card/">la procedura PINE64 per riutilizzarla</a>.</p>
+          <ol class="step-list"><li>Spegni il telefono, inserisci la scheda musicale e riavvia dalla eMMC.</li><li>Apri la manutenzione temporanea della tappa 04. Leggi l’identificatore della partizione <strong>sul PinePhone</strong>:</li></ol>
+          <div class="command"><div class="command-header">PINEPHONE · LETTURA DEI DISCHI<button class="copy" data-copy="cmd-disks">Copia</button></div><pre><code id="cmd-disks">lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS
+sudo blkid</code></pre></div>
+          <div class="notice amber"><b>Il controllo che evita una libreria vuota</b>Per exFAT, l’identificatore mostrato dal Mac può essere diverso dall’UUID usato da Linux. Usa il valore di <code>blkid</code> sul PinePhone. Nel nostro primo avvio su eMMC il montaggio era fallito proprio per questa differenza.</div>
+          <p>Il kit include un comando che monta la scheda in sola lettura, controlla la cartella Music e prepara il collegamento persistente. Sostituisci <code>UUID_DELLA_TUA_SCHEDA</code> con il valore appena letto. Il comando rifiuta il dispositivo che contiene il sistema attualmente avviato.</p>
+          <div class="command"><div class="command-header">PINEPHONE · COMANDO DA ADATTARE<button class="copy" data-copy="cmd-mount-music">Copia</button></div><pre><code id="cmd-mount-music">cd "$HOME/biapod-kit"
+sudo python3 music_setup.py "UUID_DELLA_TUA_SCHEDA" "$USER"</code></pre></div>
+          <p>La scheda resta in sola lettura sul telefono; playlist e preferiti si salvano nella memoria interna. La cartella Music locale di prova viene conservata con un altro nome. Al termine riavvia, poi apri <strong>Album → Aggiorna</strong>.</p>
+          <h3>Aggiungere altri album</h3><p>Spegni regolarmente il PinePhone e sposta la scheda nel computer. Copia i nuovi album in <code>Music/Artista/Album</code>, espelli la scheda e reinseriscila a telefono spento. Riaccendi e premi <strong>Aggiorna</strong>. Non serve reinstallare BiaPod.</p>
+          <h3>Ripristinare le playlist</h3><p>Copia i file <code>.m3u</code> o <code>.m3u8</code> salvati nella cartella <code>~/.local/share/mpd/playlists</code> del telefono. Usa percorsi relativi alla cartella Music, ad esempio <code>Artista/Album/01 - Brano.mp3</code>; i percorsi assoluti del vecchio lettore vanno adattati.</p>
+          <label class="complete"><input type="checkbox" data-step-check="libreria">Dopo un riavvio, Album mostra la musica sulla scheda e una traccia parte.</label>
+        </section>
+
+        <section class="step" id="collaudo" aria-labelledby="test-title">
+          <div class="step-top"><span class="step-number">10</span><div><p class="eyebrow">Prima dell’uso quotidiano / sul telefono</p><h2 id="test-title">Ascolta. Prova. Annota.</h2></div></div>
+          <p>Un primo brano riuscito è l’inizio del collaudo. Aggiungi la raccolta completa dopo la prova con pochi album e ripeti l’ascolto sia collegato sia a batteria.</p>
+          <div class="checks"><div><b>Audio al primo avvio</b>Il brano si sente dall’altoparlante, senza inserire le cuffie per attivarlo.</div><div><b>Cuffie e ritorno</b>Inserisci e togli il jack: l’uscita corretta riprende a volume basso.</div><div><b>Controlli touch</b>Ghiera, ricerca artista e passaggio tra pagine rispondono.</div><div><b>Volume fisico</b>I pulsanti del PinePhone cambiano il volume di un punto percentuale.</div><div><b>Blocco dell’interfaccia</b>La musica continua; la pressione prolungata permette lo sblocco.</div><div><b>Secondo avvio</b>La scheda viene montata e gli album ricompaiono dopo un riavvio regolare.</div></div>
+          <h3>Cosa offre questa edizione</h3>
+          <div class="table-wrap"><table><thead><tr><th>Funzione</th><th>Stato nel progetto</th></tr></thead><tbody><tr><td>Album, artisti, playlist, preferiti</td><td><span class="status-good">Provati</span></td></tr><tr><td>Copertina in Ora → brani dell’album</td><td><span class="status-good">Provata</span></td></tr><tr><td>Casuale su tutta la raccolta</td><td>Album → Tutta la musica · casuale</td></tr><tr><td>Cover Flow animato e ghiera touch</td><td>Inclusi; fluidità da valutare sul dispositivo</td></tr><tr><td>Telecomando Apple: tasto centrale</td><td><span class="status-good">Play / pausa provati</span></td></tr><tr><td>Telecomando Apple: volume + / −</td><td><span class="status-wip">Nessun evento rilevato</span></td></tr><tr><td>Cuffie Android, doppio / triplo clic</td><td><span class="status-wip">Da collaudare</span></td></tr><tr><td>Display spento dopo 30 secondi</td><td>Disattivato nella configurazione di riferimento</td></tr><tr><td>Installer pubblico su nuova scheda</td><td><span class="status-wip">Da provare sul telefono</span></td></tr><tr><td>Stabilità prolungata con tutta la libreria</td><td><span class="status-wip">Da convalidare</span></td></tr></tbody></table></div>
+          <div class="notice"><b>Se torna un blocco, raccogli un dato utile.</b>Annota durata dell’ascolto, batteria, cuffie o altoparlante e se il terminale risponde. Una canzone che ripete un frammento insieme al touch bloccato può indicare un problema più ampio del player; il numero degli album da solo non identifica la causa.</div>
+          <label class="complete"><input type="checkbox" data-step-check="collaudo">Ho provato i controlli, un secondo avvio e annotato l’esito dell’ascolto.</label>
+        </section>
+        <section class="closing"><p class="eyebrow">La musica torna al centro</p><h3>Il tuo prossimo vecchio telefono<br>potrebbe avere un nuovo mestiere.</h3><p>Questo è il primo progetto PimpMyPhone. Parti dalla configurazione documentata, conserva una via di recupero e migliora il lettore una modifica alla volta.</p><a href="downloads/biapod-kit-0.1.tar.gz" class="button green" download>Porta con te il kit ↓</a></section>
+      </div>
+    </div>
+
+    <section class="faq-section" id="aiuto" aria-labelledby="help-title"><div><p class="eyebrow">Quando qualcosa non torna</p><h2 id="help-title">Una mano,<br>al momento giusto.</h2><p class="muted" style="font-size:14px">I problemi incontrati durante la costruzione di BiaPod, con controlli concreti per orientarsi.</p></div><div>
+      <label for="faq-search" class="eyebrow" style="display:block;margin-bottom:10px">Cerca un problema</label><input id="faq-search" class="faq-search" type="search" placeholder="Es. scheda, audio, blocco, tastiera…"><p data-no-results hidden class="muted">Nessun risultato. Prova con «audio», «scheda» o «terminale».</p>
+      <details class="faq"><summary>BiaPod si apre, ma non vede gli album.</summary><p>Controlla prima il montaggio: un’app avviata non garantisce che la scheda sia accessibile. <code>findmnt /media/music</code> deve mostrare la partizione dati; <code>ls "$HOME/Music"</code> deve elencare gli artisti. Se il montaggio manca, confronta <code>sudo blkid</code> con la riga della musica in <code>/etc/fstab</code>. Usa l’UUID Linux della scheda attuale, poi segui la tappa 09 e aggiorna l’indice.</p><div class="command"><div class="command-header">PINEPHONE · CONTROLLI IN SOLA LETTURA<button class="copy" data-copy="cmd-empty-library">Copia</button></div><pre><code id="cmd-empty-library">findmnt /media/music
+ls -ld "$HOME/Music"
+ls "$HOME/Music"
+systemctl --user status biapod-mpd.service --no-pager</code></pre></div></details>
+      <details class="faq"><summary>Il brano avanza, ma non sento l’audio.</summary><p>Verifica volume MPD, jack e switch 6. Nel progetto l’audio era stato selezionato su un’uscita virtuale, oppure su un profilo cuffie che restava muto. Il kit usa i profili fisici <code>HiFi (Mic, Speaker)</code> e <code>HiFi (Headphones, Mic)</code> dell’immagine di riferimento. Puoi ripetere la selezione dal terminale utente con <code>~/pinepod/biapod-audio-route</code>. Se fallisce, conserva il messaggio; non alzare il volume al massimo per compensare un’uscita errata.</p></details>
+      <details class="faq"><summary>Non compare la tastiera, oppure il terminale non scrive.</summary><p>In Sxmo il blocco degli input può sembrare un congelamento: controlla il simbolo rosso barrato e prova Power una volta. Per la tastiera prova Volume −. La sessione dedicata BiaPod usa un terminale e una tastiera richiamati da tre pressioni rapide di Power. Le scorciatoie di Sxmo e quelle di BiaPod appartengono a sessioni diverse.</p></details>
+      <details class="faq"><summary>Si blocca tutto e l’audio ripete un frammento.</summary><p>Se possibile lascia il telefono nello stato del problema e leggi i registri dalla manutenzione. Se anche l’accesso è fermo, uno spegnimento forzato può essere necessario per recuperare, ma può lasciare la scheda non smontata correttamente. Dopo il recupero controlla il filesystem a scheda smontata. Nei nostri test batteria nuova, eMMC e scheda nuova non avevano eliminato i blocchi della vecchia base: non abbiamo una causa conclusiva.</p><div class="command"><div class="command-header">PINEPHONE · DOPO IL RECUPERO<button class="copy" data-copy="cmd-logs">Copia</button></div><pre><code id="cmd-logs">journalctl --list-boots
+journalctl -b -1 -k --no-pager
+tail -80 "$HOME/.local/state/biapod-session.log"</code></pre></div><p>Il registro dell’avvio precedente esiste soltanto se la conservazione dei journal è attiva. Controlla anche data e ID di avvio: l’orologio del telefono potrebbe essere errato.</p></details>
+      <details class="faq"><summary>Posso rendere più fine il volume o usare le cuffie Apple?</summary><p>La ghiera e i tasti del PinePhone regolano MPD in passi dell’1%. Il volume software MPD lavora insieme al livello dell’uscita PulseAudio. Con le EarPods provate il centro funziona; i tasti volume non generano eventi riconosciuti. Un telecomando Android/CTIA è da provare: non è garantito che tutti i modelli funzionino.</p></details>
+      <details class="faq"><summary>Come torno alla sessione precedente?</summary><p>Dalla cartella del kit esegui il ripristino della sessione di sistema, poi quello dei file utente e riavvia. I file musicali rimangono al loro posto. Questi comandi annullano l’installazione del kit; per tornare al vecchio sistema eMMC serve l’immagine di backup della tappa 08.</p><div class="command"><div class="command-header">PINEPHONE · RIPRISTINO DEL KIT<button class="copy" data-copy="cmd-restore">Copia</button></div><pre><code id="cmd-restore">cd "$HOME/biapod-kit"
+sudo python3 system_setup.py restore "$USER"
+python3 setup.py --restore
+sudo reboot</code></pre></div></details>
+      <details class="faq"><summary>Posso usare il progetto su un altro telefono?</summary><p>Il progetto PimpMyPhone può crescere con altre guide, ma questo kit è specifico per PinePhone originale e per la base indicata. Un port su altri telefoni richiede un sistema supportato, touchscreen, audio, tasti e gestione energetica verificati. La somiglianza esterna non rende intercambiabili le immagini.</p></details>
+    </div></section>
+    <section class="resources" id="fonti" aria-labelledby="sources-title"><p class="eyebrow" id="sources-title">Fonti, file e prossimi passi</p><div class="resource-grid"><div><p class="eyebrow">01 / Hardware e recupero</p><a href="https://pine64.org/documentation/PinePhone/">Documentazione PinePhone ↗</a><a href="https://pine64.org/documentation/PinePhone/Privacy_switches/">Switch hardware ↗</a><a href="https://github.com/dreemurrs-embedded/Jumpdrive">JumpDrive e ripristino ↗</a></div><div><p class="eyebrow">02 / Software di base</p><a href="https://nura.eco/install/">postmarketOS / Nura ↗</a><a href="https://sxmo.org/docs/user/sxmo.7.html">Manuale Sxmo ↗</a><a href="https://mpd.readthedocs.io/en/stable/user.html">Manuale MPD ↗</a></div><div><p class="eyebrow">03 / Il progetto</p><a href="downloads/biapod-kit-0.1.tar.gz" download>Kit BiaPod 0.1 ↓</a><a href="downloads/biapod-kit-0.1.sha256" download>Hash del kit ↓</a><a href="README.md">Struttura del progetto HTML ↗</a><small class="muted">Guida consultabile offline. I download del sistema e le fonti ufficiali richiedono Internet. Nessuna telemetria, font esterno o libreria remota.</small></div></div></section>
+  </main>
+  <footer class="footer"><a class="brand" href="#inizio">PimpMyPhone.</a><span>Un progetto di Biagio · BiaPod / laboratorio 0.1 · 08.10.2026</span><a class="back-top" href="#inizio">Torna all’inizio ↑</a></footer>
+</div>
+<div class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="240" viewBox="0 0 800 240" role="img" aria-labelledby="title desc">
+  <title id="title">BiaPod</title>
+  <desc id="desc">Marchio BiaPod: BIA pieno, pod delineato e un piccolo solco musicale.</desc>
+  <g fill="none" stroke="#8fd8c5" stroke-linecap="round">
+    <circle cx="61" cy="119" r="26" stroke-width="7"/>
+    <circle cx="61" cy="119" r="11" stroke-width="5"/>
+    <path d="M61 93V52M61 145v43" stroke-width="5"/>
+  </g>
+  <circle cx="61" cy="119" r="3.5" fill="#f4f7f5"/>
+  <text x="105" y="175" fill="#f4f7f5" font-family="DejaVu Sans, Arial, sans-serif" font-size="151" font-weight="900" letter-spacing="-5">BIA</text>
+  <text x="375" y="175" fill="none" stroke="#8fd8c5" stroke-width="4" stroke-linejoin="round" font-family="DejaVu Sans, Arial, sans-serif" font-size="151" font-weight="900" letter-spacing="-5">pod</text>
+  <path d="M108 206H730" stroke="#4d655f" stroke-width="4" stroke-linecap="round"/>
+  <path d="M108 206H302" stroke="#8fd8c5" stroke-width="7" stroke-linecap="round"/>
+</svg>
